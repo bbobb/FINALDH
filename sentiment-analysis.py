@@ -95,6 +95,46 @@ plt.savefig("polarity_plot.png")
 top_positive = combined.sort_values('Polarity', ascending=False).head(5)
 top_negative = combined.sort_values('Polarity').head(5)
 top_subjective = combined.sort_values('Subjectivity', ascending=False).head(5)
+
 print(top_positive)
 print(top_negative)
 print(top_subjective)
+
+with open("interpretation-dreams.txt", "r", encoding="utf-8") as f:
+    dreams_paragraphs = f.read().split('\n\n')
+
+with open("three_contributions.txt", "r", encoding="utf-8") as f:
+    contrib_paragraphs = f.read().split('\n\n')
+
+
+for _, row in top_subjective.iterrows():
+    para_index = int(row['Paragraph'])
+    if row['Document'] == "Interpretation of Dreams":
+        para_text = dreams_paragraphs[para_index]
+    else:
+        para_text = contrib_paragraphs[para_index]
+    
+    print(f"\n--- Paragraph {para_index} ({row['Document']}) ---")
+    print(para_text)
+
+
+
+for _, row in top_negative.iterrows():
+    para_index = int(row['Paragraph'])
+    if row['Document'] == "Interpretation of Dreams":
+        para_text = dreams_paragraphs[para_index]
+    else:
+        para_text = contrib_paragraphs[para_index]
+    
+    print(f"\n--- Paragraph {para_index} ({row['Document']}) ---")
+    print(para_text)
+
+for _, row in top_positive.iterrows():
+    para_index = int(row['Paragraph'])
+    if row['Document'] == "Interpretation of Dreams":
+        para_text = dreams_paragraphs[para_index]
+    else:
+        para_text = contrib_paragraphs[para_index]
+    
+    print(f"\n--- Paragraph {para_index} ({row['Document']}) ---")
+    print(para_text)
